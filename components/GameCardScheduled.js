@@ -2,7 +2,7 @@ import Image from 'next/image'
 import dayjs from 'dayjs';
 
 
-export default function GameCard({data}){
+export default function GameCardScheduled({data}){
     const hometeamimage = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${data.teams.home.team.id}.svg`
     const awayteamimage = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${data.teams.away.team.id}.svg`
 
