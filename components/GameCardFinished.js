@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
 export default function GameCardFinished({data}){  
+    
     const hometeamimage = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${data.teams.home.team.id}.svg`
     const awayteamimage = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${data.teams.away.team.id}.svg`
-
-
+    
     return (
-        <div className="mb-8 p-2 bg-black flex divide-y-1 w-2/5 rounded-md divide-solid divide-white justify-between items-center">
+        <div className="p-2 bg-black flex divide-y-1 w-full md:rounded-md divide-solid divide-white justify-between items-center md:w-2/5 md:mb-8">
             <div className="flex flex-col w-full">
                 <div className="flex flex-row items-center mb-1.5">
                     <div className="flex flex-row w-full">
