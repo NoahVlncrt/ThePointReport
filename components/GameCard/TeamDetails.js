@@ -16,7 +16,7 @@ export default function TeamDetails({teamInfo, image, isLive, isScheduled}){
     const teamLogo = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${teamInfo.team.id}.svg`
     console.log(teamInfo)
     return ( 
-            <div className="flex flex-row items-center mb-1.5">
+            <div className="flex flex-row items-center">
                 <div className="flex flex-row w-full">
                     <Image 
                         src={teamLogo}
@@ -25,7 +25,7 @@ export default function TeamDetails({teamInfo, image, isLive, isScheduled}){
                         height={60}
                     />
                     <div>
-                        <p className="md:text-white md:text-xl text-lg font-semibold text-black">{teamInfo.team.name}</p>
+                        <p className="md:text-white md:text-xl text-lg font-semibold md:font-bold text-black">{teamInfo.team.name}</p>
                         <p className="md:text-white font-extralight text-black">{teamInfo.leagueRecord.wins}-{teamInfo.leagueRecord.losses}-{teamInfo.leagueRecord.ot}</p>
                     </div>
                 </div>

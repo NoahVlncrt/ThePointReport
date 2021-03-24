@@ -20,7 +20,7 @@ function GameDisplay({data}) {
             return <GameCardFinished key={data.gamePk} data={game}/>
           }
           if(game.status.statusCode === "3"){
-            return <GameCardLive key={data.gamePk} data={game}/>
+            return <GameCardLive key={data.gamePk} gameData={game}/>
           }
         })
       }
@@ -46,8 +46,7 @@ export default function Home() {
   let navigationDateFormatted = navigationDateArray.map((date) => {
     return dayjs().add(date, 'day').format('MMMM D, YYYY')
   })
-
-  console.log(data)
+  
   if(error) return <p>error</p>
   return (
     <div>
