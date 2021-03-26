@@ -1,20 +1,31 @@
+import dayjs from 'dayjs';
 import Image from 'next/image'
+import useSWR from 'swr';
+
 
 let scoreDisplayHandler = (isLive, isScheduled, teamInfo) => {
-    if(!isLive && !isScheduled){
-        if(isLive){
-            return <p className="md:text-white md:font-bold font-semibold text-2xl text-black animate-pulse">{teamInfo.score}</p>
-        } else {
-            return <p className="md:text-white md:font-bold font-semibold text-2xl text-black">{teamInfo.score}</p>
-        }
+    if(isLive){
+        return <p className="md:font-bold font-semibold text-2xl md:text-white text-black animate-pulse">{teamInfo.score}</p>
+    }
+    if(!isScheduled && !isLive){
+        return <p className="md:font-bold font-semibold text-2xl md:text-white text-gray-600">{teamInfo.score}</p>
     }
 }
 
+let teamHander = (isLive, isScheduled, teamInfo) => {
+    if(!isScheduled && !isLive){
+        return <p className="text-lg font-semibold md:font-bold md:text-white text-gray-700">{teamInfo.team.name}</p>
+    } else {
+        return <p className="md:text-xl text-lg font-semibold md:font-bold md:text-white text-black">{teamInfo.team.name}</p>
+    }
+}
 
-
-export default function TeamDetails({teamInfo, image, isLive, isScheduled}){
+export default function TeamDetails({teamInfo, image, isLive, isScheduled, type}){
     const teamLogo = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${teamInfo.team.id}.svg`
-    console.log(teamInfo)
+    let dateForApiRequest = dayjs().format("YYYY-MM-DD")
+    const {data, error} = useSWR(`https://statsapi.web.nhl.com/api/v1/schedule?startDate=${dateForApiRequest}&endDate=${dateForApiRequest}&hydrate=team(leaders(categories=[points,goals,assists],gameTypes=[R])),linescore,broadcasts(all)&teamId=${teamInfo.team.id}`)
+    if(error) return <p>error</p>
+    if(!data) return <p>loading</p>
     return ( 
             <div className="flex flex-row items-center">
                 <div className="flex flex-row w-full">
@@ -25,11 +36,11 @@ export default function TeamDetails({teamInfo, image, isLive, isScheduled}){
                         height={60}
                     />
                     <div>
-                        <p className="md:text-white md:text-xl text-lg font-semibold md:font-bold text-black">{teamInfo.team.name}</p>
-                        <p className="md:text-white font-extralight text-black">{teamInfo.leagueRecord.wins}-{teamInfo.leagueRecord.losses}-{teamInfo.leagueRecord.ot}</p>
+                        {teamHander(isLive, isScheduled, teamInfo)}
+                        <p className="font-extralight text-black md:text-white">{teamInfo.leagueRecord.wins}-{teamInfo.leagueRecord.losses}-{teamInfo.leagueRecord.ot}</p>
                     </div>
                 </div>
-                {!isScheduled && scoreDisplayHandler(isLive, isScheduled, teamInfo)}
+                {scoreDisplayHandler(isLive, isScheduled, teamInfo)}
             </div>
     )
 }
