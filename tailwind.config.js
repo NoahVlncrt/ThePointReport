@@ -7,6 +7,11 @@ module.exports = {
     },
     extend: {},
   },
+  purge: [
+    './src/**/*.html',
+    './src/**/*.vue',
+    './src/**/*.jsx',
+  ],
   variants: {
     extend: {},
   },

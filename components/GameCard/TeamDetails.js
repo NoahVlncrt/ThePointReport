@@ -1,8 +1,7 @@
-import dayjs from 'dayjs';
 import Image from 'next/image'
-import useSWR from 'swr';
 
 
+// checks if the game is live and returns a score field with a pulse animation
 let scoreDisplayHandler = (isLive, isScheduled, teamInfo) => {
     if(isLive){
         return <p className="md:font-bold font-semibold text-2xl md:text-white text-black animate-pulse">{teamInfo.score}</p>
@@ -12,6 +11,8 @@ let scoreDisplayHandler = (isLive, isScheduled, teamInfo) => {
     }
 }
 
+
+// checks if the game is finished and returns a lighter colored team
 let teamHander = (isLive, isScheduled, teamInfo) => {
     if(!isScheduled && !isLive){
         return <p className="text-lg font-semibold md:font-bold md:text-white text-gray-700">{teamInfo.team.name}</p>
