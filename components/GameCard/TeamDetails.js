@@ -22,10 +22,6 @@ let teamHander = (isLive, isScheduled, teamInfo) => {
 
 export default function TeamDetails({teamInfo, image, isLive, isScheduled, type}){
     const teamLogo = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${teamInfo.team.id}.svg`
-    let dateForApiRequest = dayjs().format("YYYY-MM-DD")
-    const {data, error} = useSWR(`https://statsapi.web.nhl.com/api/v1/schedule?startDate=${dateForApiRequest}&endDate=${dateForApiRequest}&hydrate=team(leaders(categories=[points,goals,assists],gameTypes=[R])),linescore,broadcasts(all)&teamId=${teamInfo.team.id}`)
-    if(error) return <p>error</p>
-    if(!data) return <p>loading</p>
     return ( 
             <div className="flex flex-row items-center">
                 <div className="flex flex-row w-full">

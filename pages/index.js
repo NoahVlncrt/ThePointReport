@@ -11,13 +11,13 @@ function GameDisplay({data}) {
       {
         data.games.map((game) => {
           if(game.status.statusCode === "1" || game.status.statusCode === "2"){
-            return <GameCardScheduled key={data.gamePk} data={game}/>
+            return <GameCardScheduled key={game.gamePk} data={game}/>
           }
           if(game.status.statusCode === "7"){
-            return <GameCardFinished key={data.gamePk} data={game}/>
+            return <GameCardFinished key={game.gamePk} data={game}/>
           }
           if(game.status.statusCode === "3"){
-            return <GameCardLive key={data.gamePk} gameData={game}/>
+            return <GameCardLive key={game.gamePk} gameData={game}/>
           }
         })
       }
@@ -28,6 +28,11 @@ function GameDisplay({data}) {
 function Home(props) {
   return (
     <div>
+      <Head>
+        <title>On The Rink</title>
+        <meta property="og:title" content="On The Rink" key="title" />
+        <link rel="shortcut icon" href="/static/favicon.ico" />
+      </Head>
       {
         props.data.map((date, index) => {
           return <div>
@@ -43,12 +48,7 @@ function Home(props) {
 }
 
 export async function getServerSideProps(context){
-  let datesForRequest = [0, -5]
-
-  let datesForRequestFormatted = datesForRequest.map((date) => {
-    return dayjs().add(date, 'day').format('YYYY-MM-DD')
-  })
-  const res = await fetch('https://statsapi.web.nhl.com/api/v1/schedule?startDate='+datesForRequestFormatted[1]+'&endDate='+datesForRequestFormatted[0])
+  const res = await fetch('https://statsapi.web.nhl.com/api/v1/schedule?startDate='+dayjs().subtract(3, 'day').format('YYYY-MM-DD')+'&endDate='+dayjs().format('YYYY-MM-DD'))
   const data = await res.json()
 
   return {props: {data: data.dates.reverse()}}
