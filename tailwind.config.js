@@ -7,11 +7,7 @@ module.exports = {
     },
     extend: {},
   },
-  purge: [
-    './src/**/*.html',
-    './src/**/*.vue',
-    './src/**/*.jsx',
-  ],
+  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   variants: {
     extend: {},
   },
