@@ -35,7 +35,7 @@ function Home(props) {
       </Head>
       {
         props.data.map((date, index) => {
-          return <div>
+          return <div key={index}>
             <div className="bg-white block ml-1.5 md:mb-3 md:ml-2">
               <p className="text-4xl font-semibold" >{dayjs(date.date).format('MMMM D, YYYY')}</p>
             </div>
