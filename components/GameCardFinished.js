@@ -5,16 +5,16 @@ let gameStatusHandler = (gamePk) => {
     const fetcher = (...args) => fetch(...args).then(res => res.json())
     const { data, error } = useSWR('https://statsapi.web.nhl.com/api/v1/game/'+gamePk+'/linescore', fetcher)
     if(error) return <p>error</p>
-    if(!data) return <p className="self-end text-gray-700 text-opacity-75 text-sm">...</p>
+    if(!data) return <p className="self-end text-gray-700 text-opacity-75 text-sm md:text-base md:text-white">...</p>
 
     if(data.currentPeriod === 5){
-        return <p className="self-end text-gray-700 text-opacity-75 text-sm">SO</p>
+        return <p className="self-end text-gray-700 text-opacity-75 text-sm md:text-base md:text-white">SO</p>
     }
     if(data.currentPeriod === 4){
-        return <p className="self-end text-gray-700 text-opacity-75 text-sm">OT</p>
+        return <p className="self-end text-gray-700 text-opacity-75 text-sm md:text-base md:text-white">OT</p>
     }
     if(data.currentPeriod <= 3){
-        return <p className="self-end text-gray-700 text-opacity-75 text-sm">FINAL</p>
+        return <p className="self-end text-gray-700 text-opacity-75 text-sm md:text-base md:text-white">FINAL</p>
     }
 
 }
