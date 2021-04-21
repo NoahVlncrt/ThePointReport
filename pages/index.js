@@ -7,7 +7,7 @@ import GameCardLive from '../components/GameCardLive'
 
 function GameDisplay({data}) {
   return (
-    <div className="flex flex-wrap justify-start flex-start content-start md:ml-2">
+    <div className="flex flex-wrap justify-start flex-start content-start md:ml-1">
       {
         data.games.map((game) => {
           if(game.status.statusCode === "1" || game.status.statusCode === "2"){
