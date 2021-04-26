@@ -53,8 +53,7 @@ export async function getServerSideProps(context){
   return {
     props: {
       data: data.dates.reverse()
-    },
-    revalidate: 1,
+    }
   }
 }
 
