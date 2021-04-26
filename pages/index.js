@@ -47,7 +47,7 @@ function Home(props) {
   )
 }
 
-export async function getStaticProps(context){
+export async function getServerSideProps(context){
   const res = await fetch('https://statsapi.web.nhl.com/api/v1/schedule?startDate='+dayjs().subtract(3, 'day').format('YYYY-MM-DD')+'&endDate='+dayjs().format('YYYY-MM-DD')+'&hydrate=team(leaders(categories=[points,goals,assists],gameTypes=[R,P]))')
   const data = await res.json()
   return {
