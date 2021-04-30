@@ -1,8 +1,10 @@
 import dayjs from "dayjs"
 import Image from 'next/image'
-
+import ScoringEvent from '../../components/GameDetails/ScoringEvent'
 
 function Game(props){
+
+    console.log(props.data.periods)
     return (
         <div className="ml-2 mr-2">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,6 +43,31 @@ function Game(props){
                     </div>
                 </div>
             </div>
+            <div className="flex flex-col justify-center items-center">
+                {props.data.periods.map((period, index) => {
+                    return <div className="w-full">
+                        <p className="font-bold text-xl">Period {index +1}</p>
+                        <div id="period">
+                            {props.data.scoringPlays.map((play, index2) => {
+                                if(play.about.period === index +1){
+                                    return <ScoringEvent playInfo={play}/>
+                                }
+                            })}
+                        </div>
+                        {
+                            props.data.scoringPlays.map((play, index2) => {
+                                if(play.about.period != index -1 && play.about.period != index +1 && play.about.period === index && play.about.period != index +2 && play.about.period != index -2 && index2 <= 0){
+                                    return <p> no play</p>
+                                }
+                            })
+                        }
+                        
+                    </div>
+                })}
+                {/* {props.data.scoringPlays.map((play) => {
+                    return <ScoringEvent playInfo={play}/>
+                })} */}
+            </div>
         </div>
     )
 }
@@ -50,8 +77,16 @@ export async function getServerSideProps(context){
 
     const data = await res.json()
 
+    let scoringPlays = data.liveData.plays.scoringPlays.map((play) => {
+        return data.liveData.plays.allPlays[play]
+    })
+
+    let periodArray = new Array(data.liveData.linescore.currentPeriod)
+
     let sortedData = {
         gameDate: data.gameData.datetime.dateTime,
+        periods: periodArray,
+        scoringPlays,
         away: {
             abbreviation: data.gameData.teams.away.abbreviation,
             score: data.liveData.linescore.teams.away.goals,

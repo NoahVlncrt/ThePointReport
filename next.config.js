@@ -1,5 +1,5 @@
 module.exports = {
     images: {
-        domains: ['www-league.nhlstatic.com']
+        domains: ['www-league.nhlstatic.com', 'nhl.bamcontent.com', 'cms.nhl.bamgrid.com']
     }
 }
