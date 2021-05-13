@@ -18,15 +18,15 @@ export default function ScoringEvent(props){
                 <p>{props.playInfo.time}</p>
             </div>
 
-            <div className="flex flex-row w-60 ml-3">
-                <div className="rounded-full">
+            <div className="flex flex-row ml-3 justify-between w-3/5">
+                {/* <div className="rounded-full">
                     <Image
                         src={playerPhoto}
                         width={60}
                         height={60}
                         alt="yeet "
                     />
-                </div>
+                </div> */}
                 <div className="flex flex-col">
                     {props.playInfo.players.map((player, index) => {
                         if(index === 0){

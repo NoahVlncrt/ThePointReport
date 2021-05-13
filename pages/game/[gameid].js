@@ -2,6 +2,7 @@ import dayjs from "dayjs"
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import ScoringEvent from '../../components/GameDetails/ScoringEvent'
+import TeamStats from '../../components/GameDetails/TeamStats'
 
 
 function Game(props){
@@ -27,9 +28,9 @@ function Game(props){
                     </div>
                 </div>
                 <div className="flex flex-row justify-between w-44">
-                    <p className="font-bold text-2xl">{props.data.away.score}</p>
+                    <p className="font-bold text-3xl">{props.data.away.score}</p>
                     <p>FINAL</p>
-                    <p className="font-bold text-2xl">{props.data.home.score}</p>
+                    <p className="font-bold text-3xl">{props.data.home.score}</p>
                 </div>
                 <div className="flex items-center flex-col">
                     <div className="-mr-2 -ml-2 -mb-5">
@@ -44,6 +45,10 @@ function Game(props){
                         {/* <p>{props.data.liveData.linescore.teams.home.goals}</p> */}
                     </div>
                 </div>
+            </div>
+            <div className="mt-2">
+                <p className="font-bold text-xl">Team Stats</p>
+                <TeamStats teamStats={props.data.teamStats}/>
             </div>
             <div className="flex flex-col justify-center items-center">
                 {props.data.periods.map((period, index) => {
@@ -72,8 +77,25 @@ function Game(props){
 
 export async function getServerSideProps(context){
     const res = await fetch('https://statsapi.web.nhl.com/api/v1/game/'+context.params.gameid+'/feed/live')
-
     const data = await res.json()
+
+    const teamStatsRes = await fetch('https://statsapi.web.nhl.com/api/v1/game/'+context.params.gameid+'/boxscore')
+    const teamStatsData = await teamStatsRes.json()
+
+    let teamStats = {
+        away: {
+            hits: teamStatsData.teams.away.teamStats.teamSkaterStats.hits,
+            sog: teamStatsData.teams.away.teamStats.teamSkaterStats.shots,
+            penaltyMinutes: teamStatsData.teams.away.teamStats.teamSkaterStats.pim,
+            blocked: teamStatsData.teams.away.teamStats.teamSkaterStats.blocked
+        },
+        home: {
+            hits: teamStatsData.teams.home.teamStats.teamSkaterStats.hits,
+            sog: teamStatsData.teams.home.teamStats.teamSkaterStats.shots,
+            penaltyMinutes: teamStatsData.teams.home.teamStats.teamSkaterStats.pim,
+            blocked: teamStatsData.teams.home.teamStats.teamSkaterStats.blocked
+        }
+    }
 
     if(data.messageNumber === 2){
         return {
@@ -95,6 +117,7 @@ export async function getServerSideProps(context){
         gameDate: data.gameData.datetime.dateTime,
         periods: periodArray,
         scoringPlays: scoringPlays.reverse(),
+        teamStats,
         away: {
             abbreviation: data.gameData.teams.away.abbreviation,
             score: data.liveData.linescore.teams.away.goals,
