@@ -1,11 +1,15 @@
 import dayjs from "dayjs"
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import ScoringEvent from '../../components/GameDetails/ScoringEvent'
 
+
 function Game(props){
+    const router = useRouter()
+
     return (
         <div className="ml-2 mr-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg onClick={() => router.push("/")}xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
             </svg>
             <p className="text-xl">{dayjs(props.data.gameDate).format('MMMM D, YYYY')}</p>
@@ -70,6 +74,15 @@ export async function getServerSideProps(context){
     const res = await fetch('https://statsapi.web.nhl.com/api/v1/game/'+context.params.gameid+'/feed/live')
 
     const data = await res.json()
+
+    if(data.messageNumber === 2){
+        return {
+            redirect: {
+                destination: '/404',
+                permanent: false,
+            },
+        }
+    }
 
     let scoringPlays = data.liveData.plays.scoringPlays.map((play) => {
         return { period: data.liveData.plays.allPlays[play].about.period, players: data.liveData.plays.allPlays[play].players, time: data.liveData.plays.allPlays[play].about.periodTime, team: data.liveData.plays.allPlays[play].team.id}
