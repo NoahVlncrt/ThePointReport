@@ -21,7 +21,16 @@ let teamHander = (isLive, isScheduled, teamInfo) => {
     }
 }
 
+let scoreLineHandler = (teamInfo) => {
+    if(!teamInfo.leagueRecord.ot){
+        return <p className="font-extralight text-black md:text-white">{teamInfo.leagueRecord.wins}-{teamInfo.leagueRecord.losses}</p>
+    } else {
+        return <p className="font-extralight text-black md:text-white">{teamInfo.leagueRecord.wins}-{teamInfo.leagueRecord.losses}-{teamInfo.leagueRecord.ot}</p>   
+    }
+}
+
 export default function TeamDetails({teamInfo, image, isLive, isScheduled, type}){
+
     const teamLogo = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${teamInfo.team.id}.svg`
     return ( 
             <div className="flex flex-row items-center">
@@ -34,7 +43,7 @@ export default function TeamDetails({teamInfo, image, isLive, isScheduled, type}
                     />
                     <div>
                         {teamHander(isLive, isScheduled, teamInfo)}
-                        <p className="font-extralight text-black md:text-white">{teamInfo.leagueRecord.wins}-{teamInfo.leagueRecord.losses}-{teamInfo.leagueRecord.ot}</p>
+                        {scoreLineHandler(teamInfo)}
                     </div>
                 </div>
                 {scoreDisplayHandler(isLive, isScheduled, teamInfo)}
