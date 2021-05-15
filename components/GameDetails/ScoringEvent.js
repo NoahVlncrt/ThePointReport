@@ -18,7 +18,7 @@ export default function ScoringEvent(props){
                 <p>{props.playInfo.time}</p>
             </div>
 
-            <div className="flex flex-row ml-3 justify-between w-3/5">
+            <div className="flex ml-3 justify-between w-3/5 flex-row">
                 {/* <div className="rounded-full">
                     <Image
                         src={playerPhoto}
