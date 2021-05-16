@@ -7,10 +7,9 @@ import TeamStats from '../../components/GameDetails/TeamStats'
 
 function Game(props){
     const router = useRouter()
-    console.log(props.data.away.name)
     return (
         <div className="ml-2 mr-2">
-            <svg onClick={() => router.push("/")}xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="block md:hidden" onClick={() => router.push("/")}xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
             </svg>
             <p className="text-xl md:text-3xl">{dayjs(props.data.gameDate).format('MMMM D, YYYY')}</p>
@@ -37,10 +36,12 @@ function Game(props){
                         />
                     </div>
                 </div>
-                <div className="flex flex-row justify-between w-44">
-                    <p className="font-bold text-3xl">{props.data.away.score}</p>
-                    <p>FINAL</p>
-                    <p className="font-bold text-3xl">{props.data.home.score}</p>
+                <div className="flex flex-row justify-between w-44 items-center">
+                    <p className="font-bold text-3xl block md:hidden">{props.data.away.score}</p>
+                    <p className="font-bold text-5xl hidden md:block">{props.data.away.score}</p>
+                    <p className="md:text-xl">FINAL</p>
+                    <p className="font-bold text-3xl block md:hidden">{props.data.home.score}</p>
+                    <p className="font-bold text-5xl hidden md:block">{props.data.home.score}</p>
                 </div>
                 <div className="flex items-center flex-col">
                     <div className="-mr-2 -ml-2 -mb-5 block md:hidden">
@@ -77,7 +78,7 @@ function Game(props){
                             return <div className="w-full">
                                 <p className="font-bold text-xl md:text-2xl">Period {index + 1}</p>
                                 <div>
-                                    <p>no play</p>
+                                    <p>no goals scored</p>
                                 </div>
                             </div>
                         }
@@ -102,6 +103,16 @@ export async function getServerSideProps(context){
 
     const teamStatsRes = await fetch('https://statsapi.web.nhl.com/api/v1/game/'+context.params.gameid+'/boxscore')
     const teamStatsData = await teamStatsRes.json()
+
+    if(data.messageNumber === 2){
+        return {
+            redirect: {
+                destination: '/404',
+                permanent: false,
+            },
+        }
+    }
+
     let teamStats = {
         away: {
             hits: teamStatsData.teams.away.teamStats.teamSkaterStats.hits,
@@ -114,15 +125,6 @@ export async function getServerSideProps(context){
             sog: teamStatsData.teams.home.teamStats.teamSkaterStats.shots,
             penaltyMinutes: teamStatsData.teams.home.teamStats.teamSkaterStats.pim,
             blocked: teamStatsData.teams.home.teamStats.teamSkaterStats.blocked
-        }
-    }
-
-    if(data.messageNumber === 2){
-        return {
-            redirect: {
-                destination: '/404',
-                permanent: false,
-            },
         }
     }
 
