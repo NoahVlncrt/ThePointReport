@@ -4,6 +4,8 @@ import dayjs from 'dayjs';
 import GameCardScheduled from '../components/GameCardScheduled'
 import GameCardFinished from '../components/GameCardFinished'
 import GameCardLive from '../components/GameCardLive'
+import Header from '../components/Header'
+
 
 function GameDisplay({data}) {
   return (
@@ -16,7 +18,7 @@ function GameDisplay({data}) {
           if(game.status.statusCode === "7"){
             return <GameCardFinished key={game.gamePk} data={game}/>
           }
-          if(game.status.statusCode === "3"){
+          if(game.status.statusCode === "3" || game.status.statusCode === "4"){
             return <GameCardLive key={game.gamePk} gameData={game}/>
           }
         })
