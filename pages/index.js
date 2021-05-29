@@ -15,7 +15,7 @@ function GameDisplay({data}) {
           if(game.status.statusCode === "1" || game.status.statusCode === "2"){
             return <GameCardScheduled key={game.gamePk} data={game}/>
           }
-          if(game.status.statusCode === "7"){
+          if(game.status.statusCode === "7" || game.status.statusCode === "6"){
             return <GameCardFinished key={game.gamePk} data={game}/>
           }
           if(game.status.statusCode === "3" || game.status.statusCode === "4"){
