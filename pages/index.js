@@ -5,7 +5,7 @@ import GameCardScheduled from '../components/GameCardScheduled'
 import GameCardFinished from '../components/GameCardFinished'
 import GameCardLive from '../components/GameCardLive'
 import Header from '../components/Header'
-
+import SeasonStarting from '../components/SeasonStarting';
 
 function GameDisplay({data}) {
   return (
@@ -45,6 +45,10 @@ function Home(props) {
           </div>
         })
       }
+      {
+        props.noGames && 
+          <SeasonStarting/>
+      }
     </div>
   )
 }
@@ -52,9 +56,11 @@ function Home(props) {
 export async function getServerSideProps(context){
   const res = await fetch('https://statsapi.web.nhl.com/api/v1/schedule?startDate='+dayjs().subtract(3, 'day').format('YYYY-MM-DD')+'&endDate='+dayjs().format('YYYY-MM-DD')+'&hydrate=team(leaders(categories=[points,goals,assists],gameTypes=[R,P]))')
   const data = await res.json()
+
   return {
     props: {
-      data: data.dates.reverse()
+      data: data.dates.reverse(),
+      noGames: data.dates.length === 0
     }
   }
 }
