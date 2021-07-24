@@ -35,6 +35,14 @@ function Home(props) {
         <meta property="og:title" content="On The Rink" key="title" />
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
+      <header className="flex flex-row justify-between items-center m-1">
+        <p className="font-bold text-xl">On The Rink</p>
+        <nav className="flex flex-row space-x-2">
+          <a href="/" className="font-bold underline">Scores</a>
+          <a href="#" className="text-gray-500">Trade Watch</a>
+          <a href="#" className="text-gray-500">About</a>
+        </nav>
+      </header>
       {
         props.data.map((date, index) => {
           return <div key={index}>
