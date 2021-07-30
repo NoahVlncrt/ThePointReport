@@ -1,19 +1,33 @@
 import Image from 'next/image'
 
 
-function Team({team}){
+function Team({team, index}){
+    if(index % 2 === 0 ){
+        return (
+            <tr className="text-center bg-gray-200">
+                <td>{team.divisionRank}</td>
+                <td>{team.points}</td>
+                <td className="flex flex-row items-center">
+                    <div>
+                        <Image
+                            width={50}
+                            height={50}
+                            alt="logo"
+                            src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${team.team.id}.svg`}
+                        />
+                    </div>
+                    {team.team.name}
+                </td>
+                <td>{team.leagueRecord.wins}</td>
+                <td>{team.leagueRecord.losses}</td>
+                <td>{team.leagueRecord.ot}</td>
+            </tr>
+        )
+    }
     return(
         // <div className="grid grid-flow-row grid-cols-10 auto-cols-max gap-y-2">
         //     <p>{team.divisionRank}</p>
         //     <div className="flex flex-row col-span-5">
-        //         <div className="hidden sm:block col-span-2">
-        //             <Image
-        //                 src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${team.team.id}.svg`}
-        //                 width={50}
-        //                 height={50}
-        //                 alt="ye"
-        //             />
-        //         </div>
         //         <p>{team.team.name}</p>
         //     </div>
         //     <p></p>
@@ -23,7 +37,18 @@ function Team({team}){
         // </div>
         <tr className="text-center">
             <td>{team.divisionRank}</td>
-            <td>{team.team.name}</td>
+            <td>{team.points}</td>
+            <td className="flex flex-row items-center">
+                <div>
+                    <Image
+                        width={50}
+                        height={50}
+                        alt="logo"
+                        src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${team.team.id}.svg`}
+                    />
+                </div>
+                {team.team.name}
+            </td>
             <td>{team.leagueRecord.wins}</td>
             <td>{team.leagueRecord.losses}</td>
             <td>{team.leagueRecord.ot}</td>
@@ -33,23 +58,27 @@ function Team({team}){
 
 export default function StandingsCard({data}){
     return (
-        <table className="table-auto w-full">
-            <thead>
-                <tr>
-                    <th>POS</th>
-                    <th>Team</th>
-                    <th>W</th>
-                    <th>L</th>
-                    <th>OT</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    data.teamRecords.map((team) => {
-                        return <Team team={team}/>
-                    })
-                }
-            </tbody>
-        </table>
+        <div className="w-full">
+            <p className="text-xl font-bold mt-2">{data.division.name}</p>
+            <table className="table-auto w-full">
+                <thead>
+                    <tr>
+                        <th>POS</th>
+                        <th>P</th>
+                        <th>Team</th>
+                        <th>W</th>
+                        <th>L</th>
+                        <th>OT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        data.teamRecords.map((team, index) => {
+                            return <Team team={team} index={index}/>
+                        })
+                    }
+                </tbody>
+            </table>
+        </div>
     )
 }

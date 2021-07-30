@@ -10,7 +10,7 @@ export default function Standings(props){
                 <a href="/standings" className="font-bold underline">Standings</a>
                 </nav>
             </header>
-            <div className="flex flex-row flex-wrap w-full justify-around">
+            <div className="flex flex-row flex-wrap w-full justify-around lg:grid lg:grid-flow-row lg:grid-cols-2 lg:gap-2">
                 {
                     props.data.records.map((division) => {                    
                         return <StandingsCard data={division}/>
