@@ -18,6 +18,7 @@ function Team({team, index}){
                     </div>
                     {team.team.name}
                 </td>
+                <td>{team.gamesPlayed}</td>
                 <td>{team.leagueRecord.wins}</td>
                 <td>{team.leagueRecord.losses}</td>
                 <td>{team.leagueRecord.ot}</td>
@@ -49,6 +50,7 @@ function Team({team, index}){
                 </div>
                 {team.team.name}
             </td>
+            <td>{team.gamesPlayed}</td>
             <td>{team.leagueRecord.wins}</td>
             <td>{team.leagueRecord.losses}</td>
             <td>{team.leagueRecord.ot}</td>
@@ -66,6 +68,7 @@ export default function StandingsCard({data}){
                         <th>POS</th>
                         <th>P</th>
                         <th>Team</th>
+                        <th>GP</th>
                         <th>W</th>
                         <th>L</th>
                         <th>OT</th>
