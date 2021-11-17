@@ -1,11 +1,13 @@
 import Head from 'next/head'
-import React from 'react';
+import React, {useEffect} from 'react';
 import dayjs from 'dayjs';
 import GameCardScheduled from '../components/GameCardScheduled'
 import GameCardFinished from '../components/GameCardFinished'
 import GameCardLive from '../components/GameCardLive'
 import Header from '../components/Header'
 import SeasonStarting from '../components/SeasonStarting';
+import * as Scroll from 'react-scroll';
+
 
 function GameDisplay({data}) {
   return (
@@ -28,6 +30,13 @@ function GameDisplay({data}) {
 }
 
 function Home(props) {
+  useEffect(() => {
+    Scroll.scroller.scrollTo(dayjs(new Date()).format('MMMM D, YYYY'), {
+      duration: 500,
+      delay: 100,
+      smooth: true
+    })
+  }, [])
   return (
     <div>
       <Head>
@@ -44,7 +53,7 @@ function Home(props) {
       </header>
       {
         props.data.map((date, index) => {
-          return <div key={index}>
+          return <div key={index} id={dayjs().format(date.date)} name={dayjs(date.date).format('MMMM D, YYYY')}>
             <div className="bg-white block ml-1.5 md:mb-3 md:ml-2">
               <p className="text-4xl font-semibold" >{dayjs(date.date).format('MMMM D, YYYY')}</p>
             </div>
