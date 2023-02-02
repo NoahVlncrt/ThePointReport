@@ -8,6 +8,7 @@ module.exports = withMDX({
 
 module.exports = {
     images: {
-        domains: ['www-league.nhlstatic.com', 'nhl.bamcontent.com', 'cms.nhl.bamgrid.com']
+        domains: ['www-league.nhlstatic.com', 'nhl.bamcontent.com', 'cms.nhl.bamgrid.com'],
     }
+
 }
