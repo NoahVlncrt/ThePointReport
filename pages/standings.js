@@ -22,7 +22,7 @@ export default function Standings(props){
 }
 
 export async function getServerSideProps(){
-    let res = await fetch('https://statsapi.web.nhl.com/api/v1/standings?season=20212022')
+    let res = await fetch('https://statsapi.web.nhl.com/api/v1/standings?season=20222023')
     let data = await res.json()
     return {
         props: {
