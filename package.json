@@ -13,6 +13,7 @@
     "@next/mdx": "^11.0.1",
     "@nhl-api/client": "^3.1.4",
     "@prisma/client": "^3.1.1",
+    "@vercel/analytics": "^1.1.1",
     "dayjs": "^1.10.4",
     "eslint-config-next": "^13.1.6",
     "next": "^13.1.6",
