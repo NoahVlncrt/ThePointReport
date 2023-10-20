@@ -7,6 +7,8 @@ import TeamStats from '../../components/GameDetails/TeamStats'
 
 function Game(props){
     const router = useRouter()
+    const awayTeamLogo = `https://assets.nhle.com/logos/nhl/svg/${props.data.away.abbreviation}_light.svg`
+    const homeTeamLogo = `https://assets.nhle.com/logos/nhl/svg/${props.data.home.abbreviation}_light.svg`
     return (
         <div className="ml-2 mr-2">
             <svg className="block md:hidden" onClick={() => router.push("/")}xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -23,14 +25,14 @@ function Game(props){
                     </div>
                     <div className="-mr-2 -ml-2 -mb-5 block md:hidden">
                         <Image
-                            src={'https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/'+props.data.away.id+'.svg'}
-                            width={80}
-                            height={80}
+                            src={awayTeamLogo}
+                            width={100}
+                            height={100}
                         />
                     </div>
-                    <div className="-mr-2 -ml-2 -mb-5 hidden md:block">
+                    <div className="-mr-2 -ml-2 -mb-1 hidden md:block">
                         <Image
-                            src={'https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/'+props.data.away.id+'.svg'}
+                            src={awayTeamLogo}
                             width={100}
                             height={100}
                         />
@@ -46,14 +48,14 @@ function Game(props){
                 <div className="flex items-center flex-col">
                     <div className="-mr-2 -ml-2 -mb-5 block md:hidden">
                         <Image
-                            src={'https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/'+props.data.home.id+'.svg'}
-                            width={80}
-                            height={80}
+                            src={homeTeamLogo}
+                            width={0}
+                            height={0}
                         />
                     </div>
-                    <div className="-mr-2 -ml-2 -mb-5 hidden md:block">
+                    <div className="-mr-2 -ml-2 -mb-1 hidden md:block">
                         <Image
-                            src={'https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/'+props.data.home.id+'.svg'}
+                            src={homeTeamLogo}
                             width={100}
                             height={100}
                         />

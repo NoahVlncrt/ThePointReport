@@ -30,8 +30,7 @@ let scoreLineHandler = (teamInfo) => {
 }
 
 export default function TeamDetails({teamInfo, image, isLive, isScheduled, type}){
-
-    const teamLogo = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${teamInfo.team.id}.svg`
+    const teamLogo = `https://assets.nhle.com/logos/nhl/svg/${teamInfo.team.abbreviation}_light.svg`
     return ( 
             <div className="flex flex-row items-center">
                 <div className="flex flex-row w-full">

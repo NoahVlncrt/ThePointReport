@@ -2,7 +2,10 @@ import Image from 'next/image'
 
 
 export default function ScoringEvent(props){
+    console.log(props)
     const teamLogo = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${props.playInfo.team}.svg`
+    // const awayTeamLogo = `https://assets.nhle.com/logos/nhl/svg/${props.data.away.abbreviation}_light.svg`
+    // const homeTeamLogo = `https://assets.nhle.com/logos/nhl/svg/${props.data.home.abbreviation}_light.svg`
     let playerPhoto = `https://cms.nhl.bamgrid.com/images/headshots/current/60x60/${props.playInfo.players[0].player.id}@2x.jpg`
     return (
         <div className="flex w-full mt-2 mb-2 items-center justify-between">
