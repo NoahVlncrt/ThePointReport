@@ -1,7 +1,41 @@
 import Image from 'next/image'
-
+const teamNumberToAbbreviation = {
+    "1": "NJD",
+    "2": "NYI",
+    "3": "NYR",
+    "4": "PHI",
+    "5": "PIT",
+    "6": "BOS",
+    "7": "BUF",
+    "8": "MTL",
+    "9": "OTT",
+    "10": "TOR",
+    "12": "CAR",
+    "13": "FLA",
+    "14": "TBL",
+    "15": "WSH",
+    "16": "CHI",
+    "17": "DET",
+    "18": "NSH",
+    "19": "STL",
+    "20": "CGY",
+    "21": "COL",
+    "22": "EDM",
+    "23": "VAN",
+    "24": "ANA",
+    "25": "DAL",
+    "26": "LAK",
+    "28": "SJS",
+    "29": "CBJ",
+    "30": "MIN",
+    "52": "WPG",
+    "53": "ARI",
+    "54": "VGK",
+    "55": "SEA",
+}
 
 function Team({team, index}){
+    const teamLogo = `https://assets.nhle.com/logos/nhl/svg/${teamNumberToAbbreviation[team.team.id]}_light.svg`
     if(index % 2 === 0 ){
         return (
             <tr className="text-center bg-gray-200">
@@ -13,7 +47,7 @@ function Team({team, index}){
                             width={50}
                             height={50}
                             alt="logo"
-                            src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${team.team.id}.svg`}
+                            src={teamLogo}
                         />
                     </div>
                     {team.team.name}
@@ -45,7 +79,7 @@ function Team({team, index}){
                         width={50}
                         height={50}
                         alt="logo"
-                        src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${team.team.id}.svg`}
+                        src={teamLogo}
                     />
                 </div>
                 {team.team.name}

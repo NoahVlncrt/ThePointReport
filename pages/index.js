@@ -44,10 +44,11 @@ function Home(props) {
         <meta property="og:title" content="On The Rink" key="title" />
         <link rel="shortcut icon" href="/static/favicon.ico" />
       </Head>
-      <header className="flex flex-row justify-between items-center m-1">
-        <a href="/" className="font-bold text-xl">On The Rink</a>
+      <header className="flex flex-row justify-between items-end m-1">
+        <a href="/" className="font-bold text-2xl">On The Rink</a>
         <nav className="flex flex-row space-x-2">
           <a href="/" className="font-bold underline">Scores</a>
+          <a href="/standings" className="font-bold">Standings</a>
         </nav>
       </header>
       {

@@ -1,11 +1,42 @@
 import Image from 'next/image'
+const teamNumberToAbbreviation = {
+    "1": "NJD",
+    "2": "NYI",
+    "3": "NYR",
+    "4": "PHI",
+    "5": "PIT",
+    "6": "BOS",
+    "7": "BUF",
+    "8": "MTL",
+    "9": "OTT",
+    "10": "TOR",
+    "12": "CAR",
+    "13": "FLA",
+    "14": "TBL",
+    "15": "WSH",
+    "16": "CHI",
+    "17": "DET",
+    "18": "NSH",
+    "19": "STL",
+    "20": "CGY",
+    "21": "COL",
+    "22": "EDM",
+    "23": "VAN",
+    "24": "ANA",
+    "25": "DAL",
+    "26": "LAK",
+    "28": "SJS",
+    "29": "CBJ",
+    "30": "MIN",
+    "52": "WPG",
+    "53": "ARI",
+    "54": "VGK",
+    "55": "SEA",
+}
 
 
 export default function ScoringEvent(props){
-    console.log(props)
-    const teamLogo = `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${props.playInfo.team}.svg`
-    // const awayTeamLogo = `https://assets.nhle.com/logos/nhl/svg/${props.data.away.abbreviation}_light.svg`
-    // const homeTeamLogo = `https://assets.nhle.com/logos/nhl/svg/${props.data.home.abbreviation}_light.svg`
+    const teamLogo = `https://assets.nhle.com/logos/nhl/svg/${teamNumberToAbbreviation[props.playInfo.team]}_light.svg`
     let playerPhoto = `https://cms.nhl.bamgrid.com/images/headshots/current/60x60/${props.playInfo.players[0].player.id}@2x.jpg`
     return (
         <div className="flex w-full mt-2 mb-2 items-center justify-between">
